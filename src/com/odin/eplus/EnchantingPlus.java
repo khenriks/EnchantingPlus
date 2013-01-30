@@ -3,7 +3,6 @@ package com.odin.eplus;
 import com.odin.eplus.common.CommonProxy;
 import com.odin.eplus.common.blocks.ModBlocks;
 import com.odin.eplus.common.handlers.PacketHandler;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -17,7 +16,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid = "eplus", name = "Enchanting Plus", version = "0.1")
-@NetworkMod(channels = { "eplus" }, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
+@NetworkMod(channels = {"eplus"}, clientSideRequired = true, serverSideRequired = true, packetHandler = PacketHandler.class)
 public class EnchantingPlus {
 
     @Instance(value = "eplus")
@@ -28,7 +27,7 @@ public class EnchantingPlus {
 
     @Init
     public void init(FMLInitializationEvent event) {
-	NetworkRegistry.instance().registerGuiHandler(instance, proxy);
+        NetworkRegistry.instance().registerGuiHandler(instance, proxy);
     }
 
     @PostInit
@@ -39,7 +38,7 @@ public class EnchantingPlus {
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
 
-	ModBlocks.init();
+        ModBlocks.init();
     }
 
 }

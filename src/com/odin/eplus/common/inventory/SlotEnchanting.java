@@ -7,8 +7,13 @@ public class SlotEnchanting extends InventoryBasic {
     final ContainerEnchanting container;
 
     public SlotEnchanting(ContainerEnchanting container, String invName, boolean customName, int slotsCount) {
-	super(invName, customName, slotsCount);
-	this.container = container;
+        super(invName, customName, slotsCount);
+        this.container = container;
     }
 
+    @Override
+    public void onInventoryChanged() {
+        container.onCraftMatrixChanged(this);
+        super.onInventoryChanged();    //To change body of overridden methods use File | Settings | File Templates.
+    }
 }

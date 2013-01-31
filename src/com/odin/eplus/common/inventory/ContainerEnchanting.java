@@ -15,12 +15,18 @@
 
 package com.odin.eplus.common.inventory;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 public class ContainerEnchanting extends Container {
 
@@ -31,6 +37,9 @@ public class ContainerEnchanting extends Container {
     private int xPos;
     private int yPos;
     private int zPos;
+
+    private Map enchantments;
+    private Map disenchantments;
 
     public ContainerEnchanting(InventoryPlayer inventoryPlayer, World worldObj, int x, int y, int z) {
         this.worldObj = worldObj;
@@ -53,6 +62,14 @@ public class ContainerEnchanting extends Container {
         }
     }
 
+    public Map getEnchantments() {
+        return enchantments;
+    }
+
+    public Map getDisenchantments() {
+        return disenchantments;
+    }
+
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer) {
         return true;
@@ -60,6 +77,22 @@ public class ContainerEnchanting extends Container {
 
     @Override
     public void onCraftMatrixChanged(IInventory par1IInventory) {
+        checkItems();
         super.onCraftMatrixChanged(par1IInventory);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    public void checkItems() {
+        ItemStack itemStack;
+        this.enchantments = null;
+        this.disenchantments = null;
+
+        for (int i = 0; i < this.tableInventory.getSizeInventory(); i++) {
+
+            itemStack = this.tableInventory.getStackInSlot(i);
+            if (itemStack != null) {
+                this.enchantments = EnchantmentHelper.mapEnchantmentData(30, itemStack);
+                this.disenchantments = EnchantmentHelper.getEnchantments(itemStack);
+            }
+        }
     }
 }

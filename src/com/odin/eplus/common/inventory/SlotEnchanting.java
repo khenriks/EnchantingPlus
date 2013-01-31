@@ -14,6 +14,5 @@ public class SlotEnchanting extends InventoryBasic {
     @Override
     public void onInventoryChanged() {
         container.onCraftMatrixChanged(this);
-        super.onInventoryChanged();    //To change body of overridden methods use File | Settings | File Templates.
     }
 }
